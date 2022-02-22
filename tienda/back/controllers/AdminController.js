@@ -2,6 +2,7 @@
 
 var Admin=require('../models/admin');
 var bcrypt= require('bcrypt-nodejs');
+var jwt=require('../helpers/jwt');
 
 
 
@@ -52,6 +53,7 @@ const login_admin= async function(req, res){
         if(check){
             res.status(200).send({
                 data:user,
+                token: jwt.createToken(user)
             }); 
         }else{
             res.status(200).send({message:'la contra no coincide',data: undefined});
